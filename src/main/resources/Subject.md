@@ -48,7 +48,13 @@ Incorrect option! Try again.
 
 ### Stage 4: Inverted Indexing
 * **Main Task:** Performance optimization! Build an **Inverted Index Map** upon application initialization. Keys represent distinct, lowercase words, and values hold collections of line numbers (indices) where those words occur.
-* **Data Structure Layout:**
+* **Input Example:**
+  ```text
+  Line 0: John Doe
+  Line 1: Jane Doe
+  ```
+* **Data Structure Representation:**
+  Your compiled map should internally mirror this layout:
   `"john" -> [0]`, `"jane" -> [1]`, `"doe" -> [0, 1]`
 * **Kotlin Tools:** `Map<String, List<Int>>` or `MutableMap<String, MutableList<Int>>`.
 * **Checkpoint:** Ensure queries execute in $O(1)$ time by querying the map directly rather than scanning lines iteratively.
@@ -56,6 +62,7 @@ Incorrect option! Try again.
 ### Stage 5: File Input
 * **Main Task:** Read the baseline data lines from a source text file passed through command-line arguments using a flag (`--data filename.txt`).
 * **Kotlin Tools:** `args` array parsing within the `main` entry point, `File(filename).readLines()`.
+* **Input Example:** `java -jar engine.jar --data names.txt`
 * **Checkpoint:** Ensure the program parses args dynamically regardless of its position and safeguards against missing file exceptions.
 
 ### Stage 6: Search Strategies

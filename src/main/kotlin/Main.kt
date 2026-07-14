@@ -6,11 +6,15 @@ fun main() {
         return
     }
 
+    val indexedDataset = getMappedValues(dataset)
+
+    println(indexedDataset)
+
     println("Dataset loaded, you can perform any of the following actions:")
     var exit = false
     while (!exit) {
         when(displayMenu()) {
-            1 -> findPerson(dataset)
+            1 -> findPerson(dataset, indexedDataset)
             2 -> printPeople(dataset)
             0 -> exit = true
             else -> {

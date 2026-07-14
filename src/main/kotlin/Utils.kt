@@ -44,3 +44,18 @@ fun List<Entry>.rowsEmpty(): Boolean {
         entry.content.isEmpty() || entry.content.any { word -> word.isBlank() }
     }
 }
+
+fun getMappedValues(dataset: List<Entry>): Map<String, Set<Int>> {
+    val indexedMap = mutableMapOf<String, MutableSet<Int>>()
+    for (entry in dataset) {
+        val newId = entry.id ?: continue
+        for (word in entry.content) {
+            val newWord = word.lowercase()
+            if (!indexedMap.containsKey(newWord)) {
+                indexedMap[newWord] = mutableSetOf()
+            }
+            indexedMap[newWord]?.add(newId)
+        }
+    }
+    return indexedMap
+}

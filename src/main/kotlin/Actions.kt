@@ -1,12 +1,19 @@
-fun findPerson(dataset: List<Entry>) {
+fun findPerson(dataset: List<Entry>, indexedDataset: Map<String, Set<Int>>) {
     println("Enter search query:")
     val query = readlnOrNull()
-    val searchResult = dataset.find{ it.content.contains("$query", ignoreCase = true) }
+    val cleanQuery = query?.lowercase()
+    val match = indexedDataset[cleanQuery]
 
-    if (searchResult != null) {
-        println(formatListOfStrings(searchResult.content))
-    } else {
-        println("Not found")
+    if (match.isNullOrEmpty() || cleanQuery == null) {
+        println("No match found.")
+        return
+    }
+
+    match.forEach { id ->
+        val dataRow = dataset.find { it.id == id }
+        if (dataRow != null) {
+            println(formatListOfStrings(dataRow.content))
+        }
     }
 }
 
