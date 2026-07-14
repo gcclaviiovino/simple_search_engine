@@ -1,26 +1,21 @@
 fun main() {
-    val dataset = getVals()
-    println("Query a specific index")
-    val query = readlnOrNull()
-    val ret = dataset.find { it.code == query }
+    println("Enter number of rows:")
+    val rows = readlnOrNull()?.toIntOrNull() ?: return
+    val inputRows = mutableListOf<String>()
+    for (i in 0 until rows) {
+        val line = readlnOrNull() ?: break
+        inputRows.add(line)
+    }
+    val dataset = getVals(inputRows)
 
-    if (ret != null && ret.id != null) {
-        println(ret.id)
+    println("Enter search query:")
+    val query = readlnOrNull()
+    val searchResult = dataset.find{ it.content.contains("$query", ignoreCase = true) }
+
+    if (searchResult != null) {
+        println(formatListOfStrings(searchResult.content))
     } else {
         println("Not found")
     }
-}
-
-fun getVals(): List<Entry> {
-    println("Provide a dataset (i.e. series of index-related words, like 'first', separated by a space)")
-    val input = readlnOrNull() ?: return emptyList()
-
-    return input.split(' ')
-        .filter { it.isNotEmpty() } // Handles accidental double spaces
-        .map { word ->
-            val cleanWord = word.lowercase()
-            val indexValue = ordinalMap.entries.find { it.value == cleanWord }?.key
-            Entry(indexValue, word)
-        }
 }
 

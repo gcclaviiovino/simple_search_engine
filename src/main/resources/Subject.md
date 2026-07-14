@@ -1,6 +1,6 @@
-# Kotlin Search Microservice — Project Blueprint & Portfolio Pivot
+# Kotlin Search Microservice — Project Blueprint
 
-This blueprint provides a comprehensive guide for building the **Simple Search Engine** core and pivoting it into a production-ready **Kotlin Microservice**. Designed for an aspiring full-stack/backend engineer targeting a junior software engineering role, this architectural roadmap bridges the gap between basic console logic and enterprise backend engineering.
+This blueprint provides a comprehensive guide for building the **Simple Search Engine** core and pivoting it into a production-ready **Kotlin Microservice**. This architectural roadmap bridges the gap between basic console logic and enterprise backend engineering.
 
 ---
 
@@ -16,15 +16,34 @@ Before exposing logic to the web, build and validate the search mechanisms.
   Words: first second third
   Query: second
   ```
-* **Practical Checkpoint:** Ensure that searching for the first word outputs `1` and searching for a completely non-existent word cleanly prints `Not found`.
+* **Checkpoint:** Ensure that searching for the first word outputs `1` and searching for a completely non-existent word cleanly prints `Not found`.
+
 ### Stage 2: Expand the Search
 * **Main Task:** Read multiple independent text lines representing distinct data rows. Read a single query and print all lines containing that query using a case-insensitive linear search.
 * **Kotlin Tools:** `MutableList<String>`, `String.contains(..., ignoreCase = true)`.
+* **Input Example:**
+```text
+Enter number of lines: 3
+Katie Jacobs kjacobs@gmail.com
+John Doe
+Alice Smith
+Enter search query: Katie
+```
+* **Output Example:** `Katie Jacobs kjacobs@gmail.com`
 * **Checkpoint:** Verify that case-mismatched queries (e.g., `katie` matching `Katie Jacobs`) still return the full line.
 
 ### Stage 3: User Menu
 * **Main Task:** Wrap Stage 2 logic inside an interactive text menu loop (`1. Search`, `2. Print all data`, `0. Exit`). Handle invalid choices gracefully.
 * **Kotlin Tools:** `while(true)` loop, `when` conditional expression.
+* **Input/Output Example:**
+```text
+1. Find a person
+2. Print all people
+0. Exit
+> 3
+Incorrect option! Try again.
+```
+* 
 * **Checkpoint:** Verify menu bounds: `3` triggers an error, `2` prints all entries, `0` exits safely.
 
 ### Stage 4: Inverted Indexing
@@ -51,7 +70,7 @@ Before exposing logic to the web, build and validate the search mechanisms.
 
 ## 🚀 Phase 2: The Enterprise Portfolio Pivot (Microservice Evolution)
 
-To stand out for a junior Kotlin backend engineer role, transform your console tool into a decoupled, asynchronous Web API using **Ktor** or **Spring Boot**.
+Transform your console tool into a decoupled, asynchronous Web API using **Ktor** or **Spring Boot**.
 
 ```text
     [ Client / Frontend ]
@@ -93,7 +112,7 @@ Replace standard input/output loops with a structured REST API layer:
     * **Response:** Returns an array of matching text strings in a `200 OK` JSON format.
 
 ### 3. Production-Ready Kotlin Features to Showcase
-To demonstrate a professional skill level, implement the following advanced Kotlin techniques:
+Implement the following advanced Kotlin techniques:
 
 * **Asynchronous Concurrency (Coroutines):** Use Kotlin Coroutines (`Dispatchers.Default`) when processing file uploads or high-volume dataset insertions. This prevents structural thread blocking during computationally expensive index updates.
 * **Idiomatic Type Safety & Null Safety:** Handle missing keys or invalid requests using Kotlin's expressive `Result` wrapping or explicit nullable operators (`?`) instead of scattering risky try-catch blocks everywhere.
@@ -106,14 +125,3 @@ To demonstrate a professional skill level, implement the following advanced Kotl
 * **Containerization:** Include a standard multi-stage `Dockerfile` to allow reviewers to run your search microservice with a single command.
 
 ---
-
-## 🛠️ Quick-Start Kotlin Reference
-
-| Concept | C++ / JS Counterpart | Kotlin Implementation |
-| :--- | :--- | :--- |
-| **Switch Conditional** | `switch(x) { case 1: ... }` | `when(x) { 1 -> ... }` |
-| **Dynamic Array** | `std::vector<string>` / `[]` | `val list = mutableListOf<String>()` |
-| **Dictionary / Map** | `std::map` / `new Map()` | `val index = mutableMapOf<String, MutableList<Int>>()` |
-| **Null Constraints** | Evaluated dynamically at runtime | `val name: String? = null` (Enforced at compilation time) |
-| **Array Transforms** | `.filter()` / `.map()` (JS) | `.filter { it.contains(query) }` (`it` identifies implicit parameter) |
-| **Asynchronous Scope** | `async / await` or Promises (JS) | `coroutineScope { launch(Dispatchers.Default) { ... } }` |
