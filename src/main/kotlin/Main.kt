@@ -8,8 +8,6 @@ fun main() {
 
     val indexedDataset = getMappedValues(dataset)
 
-    println(indexedDataset)
-
     println("Dataset loaded, you can perform any of the following actions:")
     var exit = false
     while (!exit) {
