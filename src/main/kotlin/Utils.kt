@@ -1,7 +1,7 @@
 data class Entry(val id: Int?, val content: List<String>)
 
-enum class Option() {
-    FIND, PRINT, EXIT
+enum class SearchCondition(val value: String) {
+    ALL("ALL"), ANY("ANY"), NONE("NONE"), ERROR("ERROR")
 }
 
 fun getVals( inputStrings: List<String> ): List<Entry> {
@@ -33,8 +33,8 @@ fun getData(): List<Entry> {
 }
 
 fun displayMenu(): Int? {
-    println("1. Find a person\n" +
-            "2. Print all people\n" +
+    println("1. Search in dataset\n" +
+            "2. Print full dataset\n" +
             "0. Exit")
     return readlnOrNull()?.toIntOrNull()
 }
