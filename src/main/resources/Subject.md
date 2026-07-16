@@ -75,7 +75,7 @@ Incorrect option! Try again.
 
 ---
 
-## 🚀 Phase 2: The Enterprise Portfolio Pivot (Microservice Evolution)
+## 🚀 Phase 2: Microservice Evolution
 
 Transform your console tool into a decoupled, asynchronous Web API using **Ktor** or **Spring Boot**.
 

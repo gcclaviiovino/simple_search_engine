@@ -1,5 +1,8 @@
 plugins {
     kotlin("jvm") version "2.4.0"
+    id("org.springframework.boot") version "3.5.16"
+    kotlin("plugin.spring") version "2.4.0"
+    kotlin("plugin.jpa") version "2.2.20"
 }
 
 group = "org.example"
@@ -11,6 +14,18 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.5.16"))
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation(kotlin("stdlib"))
+}
+
+allOpen {
+    annotation("jakarta.persistence.*")
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
 }
 
 kotlin {
@@ -26,9 +41,8 @@ tasks.register<JavaExec>("runEngine") {
     description = "Runs the search engine with arguments"
 
     dependsOn("classes")
-    mainClass.set("MainKt")
+    mainClass.set("org.microservice.SearchEngineApplicationKt")
 
-    // Use project.the to safely extract the runtime classpath
     val sourceSets = project.the<SourceSetContainer>()
     classpath = sourceSets["main"].runtimeClasspath
 
