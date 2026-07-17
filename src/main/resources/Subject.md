@@ -110,10 +110,10 @@ Break your application into distinct, testable layers:
 
 ### 2. Microservice API Design
 Replace standard input/output loops with a structured REST API layer:
-* `POST /api/documents`
+* `POST /api/upload`
     * **Description:** Dynamically append new text strings or files to the dataset.
     * **Action:** Triggers a background update to update the in-memory inverted index map.
-    * **Payload:** `{"text": "John Doe jdoe@gmail.com"}`
+    * **Payload:** `{"text": "John Doe"}`
 * `GET /api/search?query=John&strategy=ALL`
     * **Description:** Query the search engine via URL parameters.
     * **Response:** Returns an array of matching text strings in a `200 OK` JSON format.

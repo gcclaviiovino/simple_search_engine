@@ -5,11 +5,10 @@ import org.springframework.stereotype.Service
 class SearchService (
     private val entryInterface: EntryInterface
 ) {
-    private val indexedDataset: Map<String, Set<Int>> by lazy {
-        getMappedValues(entryInterface.findAll())
-    }
+    private var indexedDataset: Map<String, Set<Int>> = getMappedValues()
 
-    private fun getMappedValues(dataset: List<Entry>): Map<String, Set<Int>> {
+    private fun getMappedValues(): Map<String, Set<Int>> {
+        val dataset = entryInterface.findAll()
         val indexedDataset = mutableMapOf<String, MutableSet<Int>>()
         for (entry in dataset) {
             val newId = entry.id ?: continue
@@ -80,5 +79,9 @@ class SearchService (
 
     fun findAll() : List<Entry> {
         return entryInterface.findAll()
+    }
+
+    fun rebuildIndex() {
+        indexedDataset = getMappedValues()
     }
 }
