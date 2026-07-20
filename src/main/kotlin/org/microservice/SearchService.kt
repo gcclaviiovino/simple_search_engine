@@ -1,5 +1,7 @@
 package org.microservice
 import org.springframework.stereotype.Service
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Service
 class SearchService (
@@ -51,17 +53,15 @@ class SearchService (
             }
 
             SearchCondition.ANY -> {
-                if (wordIds.isNullOrEmpty()) {
-                    emptySet()
-                } else {
-                    wordIds.reduce { acc, set -> acc union set }
-                }
+                cleanQueryWords
+                    .flatMap { word -> indexedDataset[word] ?: emptySet() }
+                    .toSet()
             }
 
             SearchCondition.NONE -> {
                 val allIds = entryInterface.findAll().mapNotNull { it.id }.toSet()
-                val excludedIds = wordIds.fold(emptySet<Int>()) { acc, set ->
-                    acc union set
+                val excludedIds = wordIds.fold(mutableSetOf<Int>()) { acc, set ->
+                    acc.apply { addAll(set) }
                 }
 
                 allIds subtract excludedIds
@@ -81,7 +81,7 @@ class SearchService (
         return entryInterface.findAll()
     }
 
-    fun rebuildIndex() {
+    suspend fun rebuildIndex() = withContext(Dispatchers.Default) {
         indexedDataset = getMappedValues()
     }
 }

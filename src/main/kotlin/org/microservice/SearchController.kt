@@ -42,18 +42,26 @@ class SearchController(private val searchService: SearchService, private val dat
     }
 
     @PostMapping("/upload")
-    fun uploadData(
+    suspend fun uploadData(
         @RequestBody dataRequest: DataRequest
     ) : ResponseEntity<Map<String, String>> {
         if (dataRequest.text.isBlank()) {
             return ResponseEntity.badRequest().body(mapOf("error" to "Text content cannot be empty."))
         }
+        return datasetRepository.saveData(dataRequest.text).fold(
+            onSuccess = { newEntry ->
+                searchService.rebuildIndex()
 
-        val newEntry = datasetRepository.saveData(dataRequest.text)
-        searchService.rebuildIndex()
-        return ResponseEntity.ok(mapOf(
-            "message" to "Document added successfully",
-            "id" to newEntry?.id.toString()
-        ))
+                ResponseEntity.ok(mapOf(
+                    "message" to "Document added successfully",
+                    "id" to newEntry?.id.toString()
+                ))
+            },
+            onFailure = { error ->
+                ResponseEntity.badRequest().body(mapOf(
+                    "error" to (error.message ?: "Invalid request content")
+                ))
+            }
+        )
     }
 }

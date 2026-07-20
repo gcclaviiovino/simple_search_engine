@@ -30,12 +30,13 @@ class DatasetRepository: EntryInterface {
             }
     }
 
-    fun saveData(text: String) : Entry? {
+    fun saveData(text: String) : Result<Entry?> {
+        if (text.isBlank()) return Result.failure(IllegalStateException("Text cannot be blank"))
         val newId = entries.size
         val newWords = text.split("\\s+".toRegex()).filter { it.isNotBlank() }
         val newEntry = Entry(id= newId, content= newWords)
 
         entries.add(newEntry)
-        return newEntry
+        return Result.success(newEntry)
     }
 }
