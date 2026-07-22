@@ -44,7 +44,7 @@ Once the core logic was validated, the project was refactored into a layered, no
 * **Idiomatic Error Handling:** Replaced verbose `try-catch` structures with Kotlin's idiomatic `Result<T>` wrapping and functional `.fold()` constructs for predictable error propagation.
 * **Cloud-Native Delivery:** Containerized via a multi-stage **Dockerfile** leveraging JDK 21 compilation and a lightweight Temurin JRE runtime, preventing local environment leakage while ensuring consistent cross-platform execution.
 
-## Getting Started
+## 🔌Getting Started
 
 ### Prerequisites
 
@@ -100,10 +100,10 @@ Once running, verify the service health by executing a query via cURL:
 curl "http://localhost:8080/api/search"
 ```
 
-## Authors
+## 👩‍💻Authors
 
 Lavinia Iovino (me!)
 
-## Acknowledgments
+## 👀Acknowledgments
 
 * [Hyperskill Project](https://hyperskill.org/projects/89)
