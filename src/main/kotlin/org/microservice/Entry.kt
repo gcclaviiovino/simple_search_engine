@@ -1,6 +1,10 @@
 package org.microservice
 import jakarta.persistence.*
 
+/*
+    @brief: Entry entity, holding id - string list data pairs.
+ */
+
 @Entity
 @Table(name = "entries")
 class Entry(

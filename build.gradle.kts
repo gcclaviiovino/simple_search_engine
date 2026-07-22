@@ -22,6 +22,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     implementation("io.projectreactor:reactor-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
 }
 
 allOpen {
@@ -32,7 +35,7 @@ allOpen {
 }
 
 kotlin {
-    jvmToolchain(26)
+    jvmToolchain(21)
 }
 
 tasks.test {

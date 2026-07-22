@@ -15,11 +15,14 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/api")
 class SearchController(private val searchService: SearchService, private val datasetRepository: DatasetRepository) {
-    @GetMapping("/search-all")
+    // Endpoint to search with no query parameter
+    @GetMapping("/search", params = ["!query"])
     fun searchAll() : List<Entry> {
         return searchService.findAll()
     }
-    @GetMapping("/search-filtered")
+
+    // Entry point to specify query parameter
+    @GetMapping("/search", params = ["query"])
     fun searchFiltered(
         @RequestParam query: String,
         @RequestParam(defaultValue = "ALL") strategy: SearchCondition
@@ -41,6 +44,7 @@ class SearchController(private val searchService: SearchService, private val dat
         return searchService.findPerson(query, strategy)
     }
 
+    // Endpoint to upload new data through a JSON text payload
     @PostMapping("/upload")
     suspend fun uploadData(
         @RequestBody dataRequest: DataRequest

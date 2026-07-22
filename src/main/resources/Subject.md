@@ -62,7 +62,7 @@ Incorrect option! Try again.
 ### Stage 5: File Input
 * **Main Task:** Read the baseline data lines from a source text file passed through command-line arguments using a flag (`--data filename.txt`).
 * **Kotlin Tools:** `args` array parsing within the `main` entry point, `File(filename).readLines()`.
-* **Input Example:** `java -jar engine.jar --data names.txt`
+* **Input Example:** `java -jar engine.jar --data dataset.txt`
 * **Checkpoint:** Ensure the program parses args dynamically regardless of its position and safeguards against missing file exceptions.
 
 ### Stage 6: Search Strategies
@@ -126,8 +126,6 @@ Implement the following advanced Kotlin techniques:
 * **Functional Programming Constructs:** Leverage high-order collection transforms (`.flatMap`, `.fold`, `.filter`) to compute matching sets during multi-word strategy resolutions (`ALL`, `ANY`, `NONE`).
 
 ### 4. Advanced Ecosystem Tooling
-* **Framework:** **Ktor Server** or **Spring Boot** with **Kotlinx.serialization** for ultra-fast JSON serialization.
-* **Database / Cache (Optional Integration):** Use **Exposed** (Kotlin's lightweight SQL ORM) or **Redis** to cache compiled indexes, proving you understand state persistence.
 * **Unit Testing:** Write robust unit tests with **JUnit 5** and utilize **MockK** (a Kotlin-first mocking framework) to mock data layers inside service tests.
 * **Containerization:** Include a standard multi-stage `Dockerfile` to allow reviewers to run your search microservice with a single command.
 
